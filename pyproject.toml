@@ -8,6 +8,7 @@ packages = [{include = "pydantic_custom_types"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+build = "^0.9.0"
 
 
 [build-system]
