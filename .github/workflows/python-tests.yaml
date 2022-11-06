@@ -5,9 +5,9 @@ name: Python tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "*" ]
 
 jobs:
   test:
@@ -44,8 +44,3 @@ jobs:
         run: |
           poetry run python -m unittest discover
         working-directory: tests
-
-      - name: Install
-        run: |
-          poetry run python setup.py sdist bdist_wheel
-          poetry run pip install dist/pydantic-custom-types-*.whl
