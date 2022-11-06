@@ -1,16 +1,39 @@
 # pydantic custom types
-distributes custom types instead of copy pasting code for pipelines input validation
+A collection of custom types for pydantic  
+https://github.com/pydantic/pydantic
 
-## Create a new release
-Bump version in file `./pydantic_custom_types/VERSION`  
-make a PR to master, then merge.  
-In github, make a new release and gh actions will trigger.
+Useful for validation input parameters for infrastructure pipelines when building kubernetes apps/clusters
 
-## Github Actions
+## Requirements
 
-**Tests**  
-Unittests run on all commits.
+`python >= 3.10`
 
-**Publish to pypi**
-Pushes package to pypi  
-link: https://pypi.org/project/pydantic-custom-types/
+## Installation
+
+`pip install pydantic-custom-types`
+
+## Examples
+
+```python
+from pydantic import BaseModel
+from pydantic_custom_types.kubernetes import NamespaceName, SecretName
+
+class K8sNamespace(BaseModel):
+    # These string types only allow: lowercase/numbers/dash, cannot start with dash/number
+    # NamepaceName has linit at 63 characters
+    # SecretName has linit at 63 characters
+    name: NamespaceName 
+    secret_name: SecretName
+
+# will pass
+K8sNamespace(
+    name="my-namespace",
+    secret_name="my-secret"
+)
+
+# will not pass
+K8sNamespace(
+    name="-0mynameSpace",
+    secret_name="0mysecret"
+)
+```
