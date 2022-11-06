@@ -40,8 +40,6 @@ jobs:
           poetry install --no-root
         working-directory: tests
 
-        displayName: 'Install poetry'
-
       - name: Run Tests
         run: |
           poetry run python -m unittest discover
