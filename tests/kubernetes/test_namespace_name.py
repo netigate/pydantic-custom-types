@@ -1,6 +1,6 @@
 from unittest import TestCase
 from pydantic_custom_types.kubernetes import NamespaceName
-from tests.util import randomword
+from .util import randomword
 
 
 class TestNamespaceName(TestCase):
