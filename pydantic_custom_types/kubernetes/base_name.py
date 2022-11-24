@@ -3,8 +3,14 @@ from string import ascii_lowercase
 
 class BaseName(str):
     """
-    Base validation of kubernetes names. All other types may inherit for this one
+    Base validation of kubernetes/host names. All other types may inherit for this one
     to get base validation.
+    The following is required:
+    - type string
+    - not empty string
+    - only a-z, 0-9, and dash
+    - cannot start with number
+    - cannot start/end with dash
     """
     NUMBERS = "0123456789"
     LEGAL_CHARS = ascii_lowercase + "-" + NUMBERS
@@ -19,7 +25,7 @@ class BaseName(str):
         cls.is_empty_string(name)
         cls.has_upper_case(name)
         cls.starts_with_number(name)
-        cls.starts_with_dash(name)
+        cls.starts_end_with_dash(name)
 
         return name
 
@@ -48,7 +54,7 @@ class BaseName(str):
         return name
 
     @staticmethod
-    def starts_with_dash(name):
-        if name[0] == "-":
-            raise ValueError(f'Value cannot start with a dash: "{name}"')
+    def starts_end_with_dash(name):
+        if name.startswith("-") or name.endswith("-"):
+            raise ValueError(f'Value cannot start/end with a dash: "{name}"')
         return name

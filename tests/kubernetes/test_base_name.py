@@ -1,7 +1,7 @@
 from unittest import TestCase
 from pydantic import BaseModel
 from pydantic.error_wrappers import ValidationError
-from pydantic_custom_types.base_name import BaseName
+from pydantic_custom_types.kubernetes.base_name import BaseName
 
 
 class TestBaseName(TestCase):
@@ -61,25 +61,27 @@ class TestBaseName(TestCase):
         case = "namespace"
         self.assertTrue(self.bn.has_upper_case(case))
 
-    def test_starts_with_number_fail(self):
+    def test_starts_end_with_number_fail(self):
         case = "9namespace"
         with self.assertRaises(ValueError):
             self.bn.starts_with_number(case)
 
-    def test_starts_with_number_pass(self):
+    def test_starts_end_with_number_pass(self):
         case = "namespace"
         self.assertTrue(
             self.bn.starts_with_number(case)
         )
 
-    def test_starts_with_dash_fail(self):
-        case = "-namespace"
-        with self.assertRaises(ValueError):
-            self.bn.starts_with_dash(case)
+    def test_starts_end_with_dash_fail(self):
+        cases = ["-namespace", "name-"]
+
+        for c in cases:
+            with self.assertRaises(ValueError):
+                self.bn.starts_end_with_dash(c)
 
     def test_starts_with_dash_pass(self):
         case = "namespace"
         self.assertTrue(
-            self.bn.starts_with_dash(case)
+            self.bn.starts_end_with_dash(case)
         )
 

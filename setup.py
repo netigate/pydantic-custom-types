@@ -44,6 +44,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.10",
-    # install_requires=[],
+    install_requires=[
+        "decouple>=3.6"
+    ],
 )
 

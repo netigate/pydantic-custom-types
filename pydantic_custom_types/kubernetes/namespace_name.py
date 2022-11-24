@@ -1,4 +1,4 @@
-from pydantic_custom_types.base_name import BaseName
+from pydantic_custom_types.kubernetes.base_name import BaseName
 
 
 class NamespaceName(BaseName):
@@ -15,6 +15,11 @@ class NamespaceName(BaseName):
     def has_to_many_characters(cls, name: str):
         max_length = 64
         if len(name) >= max_length:
-            raise ValueError(f"Name cannot be longer than {max_length} characters")
+            raise ValueError(f"Name must be less than {max_length} characters")
+        return name
 
+    @classmethod
+    def has_dot(cls, name: str):
+        if "." in name:
+            raise ValueError("Name cannot contain a dot")
         return name

@@ -1,4 +1,5 @@
-from pydantic_custom_types.base_name import BaseName
+from pydantic_custom_types.kubernetes.base_name import BaseName
+from tests.util import randomword
 
 
 class SecretName(BaseName):

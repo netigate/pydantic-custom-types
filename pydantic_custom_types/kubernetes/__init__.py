@@ -1,2 +1,2 @@
-from .namespace import NamespaceName
-from .secret import SecretName
+from pydantic_custom_types.kubernetes.namespace_name import NamespaceName
+from pydantic_custom_types.kubernetes.secret import SecretName
