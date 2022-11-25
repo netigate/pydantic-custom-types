@@ -9,7 +9,7 @@ class RealAdUser(str):
     """
     @staticmethod
     def users() -> list[str]:
-        return load_local_file("USERS_FILE")
+        return [x.lower() for x in load_local_file("USERS_FILE")]
 
     @classmethod
     def __get_validators__(cls):
@@ -17,8 +17,9 @@ class RealAdUser(str):
 
     @classmethod
     def validate(cls, name: str):
-        if name.lower() in cls.users():
-            return name
+        for user in cls.users():
+            if name.lower() == name:
+                return name
         else:
             raise ValueError(f'User "{name}" does not exist')
 
