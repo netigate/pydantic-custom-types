@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pydantic-custom-types"
-version = "0.2.0"
+version = "0.2.1"
 description = "Custom types for pydantic used in SRE peipelins for validation input vars"
 authors = ["per lejon <per.lejon@netigate.se>"]
 readme = "README.md"

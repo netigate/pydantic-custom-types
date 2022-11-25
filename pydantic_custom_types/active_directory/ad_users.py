@@ -18,7 +18,7 @@ class RealAdUser(str):
     @classmethod
     def validate(cls, name: str):
         for user in cls.users():
-            if user.lower() == name:
+            if user.lower() == name.lower():
                 return name
         else:
             raise ValueError(f'User "{name}" does not exist')
